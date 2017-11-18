@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">MyStudyApp</string>
+
+    <string name="error_tips">糟糕！加载失败了ヽ(≧Д≦)ノ\n 偷偷告诉你一些可能的原因：\n1.惨不忍睹的网络环境\n 2.服务器君的不定期抽风</string>
+</resources>
