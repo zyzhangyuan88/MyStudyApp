@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.zhangyuan.app.rxlifecycle.RxFragment;
+
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import me.yokeyword.fragmentation.SupportFragment;
@@ -17,7 +19,7 @@ import me.yokeyword.fragmentation.SupportFragment;
  * 无MVP的Fragment基类
  */
 
-public abstract class SimpleFragment extends SupportFragment {
+public abstract class SimpleFragment extends RxFragment {
 
     protected View mView;
     protected Activity mActivity;

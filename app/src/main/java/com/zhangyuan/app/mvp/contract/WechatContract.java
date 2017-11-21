@@ -1,6 +1,8 @@
 package com.zhangyuan.app.mvp.contract;
 
 
+import android.app.Activity;
+
 import com.zhangyuan.app.base.BasePresenter;
 import com.zhangyuan.app.base.BaseView;
 import com.zhangyuan.app.mvp.model.bean.WXItemBean;
@@ -26,7 +28,7 @@ public interface WechatContract {
 
     interface Presenter extends BasePresenter<View> {
 
-        void getWechatData();
+        void getWechatData(Activity activity);
 
         void getMoreWechatData();
     }

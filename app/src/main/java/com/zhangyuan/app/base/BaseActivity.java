@@ -28,6 +28,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends SimpleActivi
                 .build();
     }
 
+
     protected ActivityModule getActivityModule(){
         return new ActivityModule(this);
     }

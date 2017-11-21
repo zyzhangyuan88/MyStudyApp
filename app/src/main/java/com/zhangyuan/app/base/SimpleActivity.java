@@ -7,7 +7,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 
+import com.trello.rxlifecycle2.LifecycleProvider;
+import com.trello.rxlifecycle2.android.ActivityEvent;
 import com.zhangyuan.app.app.App;
+import com.zhangyuan.app.rxlifecycle.RxActivity;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -18,7 +21,7 @@ import me.yokeyword.fragmentation.SupportActivity;
  * 无MVP的activity基类
  */
 
-public abstract class SimpleActivity extends SupportActivity {
+public abstract class SimpleActivity extends RxActivity {
 
     protected Activity mContext;
     private Unbinder mUnBinder;
