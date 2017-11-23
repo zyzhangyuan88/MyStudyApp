@@ -7,10 +7,12 @@ import android.util.Log;
 
 import com.trello.rxlifecycle2.android.ActivityEvent;
 import com.zhangyuan.app.base.RxPresenter;
+import com.zhangyuan.app.http.RetrofitHelper;
 import com.zhangyuan.app.http.response.WXHttpResponse;
 import com.zhangyuan.app.mvp.DataManager;
 import com.zhangyuan.app.mvp.contract.WechatContract;
 import com.zhangyuan.app.mvp.model.bean.WXItemBean;
+import com.zhangyuan.app.mvp.model.prefs.ImplPreferencesHelper;
 import com.zhangyuan.app.rxlifecycle.RxActivity;
 import com.zhangyuan.app.util.RxUtil;
 import com.zhangyuan.app.component.CommonSubscriber;
@@ -39,27 +41,33 @@ public class WechatPresenter extends RxPresenter<WechatContract.View> implements
     private String queryStr = null;
 
     private DataManager mDataManager;
+    private RetrofitHelper retrofitHelper;
+    private ImplPreferencesHelper preferencesHelper;
 
     @Inject
-    public WechatPresenter(DataManager mDataManager) {
+    public WechatPresenter(DataManager mDataManager, RetrofitHelper retrofitHelper,ImplPreferencesHelper preferencesHelper) {
         this.mDataManager = mDataManager;
+        this.retrofitHelper = retrofitHelper;
+        this.preferencesHelper = preferencesHelper;
     }
 
 
     @Override
     public void getWechatData(Activity activity) {
         currentPage = 1;
-//        addSubscribe(mDataManager.fetchWechatListInfo(NUM_OF_PAGE,currentPage)
-//                .compose(RxUtil.<WXHttpResponse<List<WXItemBean>>>rxSchedulerHelper())
-//                .compose(RxUtil.<List<WXItemBean>>handleWXResult())
-//                .compose(((RxActivity)activity).<List<WXItemBean>>bindUntilEvent(ActivityEvent.DESTROY))
-//                .subscribeWith(new CommonSubscriber<List<WXItemBean>>(mView) {
-//                    @Override
-//                    public void onNext(List<WXItemBean> wxItemBeen) {
-//                        mView.showContent(wxItemBeen);
-//                    }
-//                })
-//        );
+
+
+        addSubscribe(retrofitHelper.fetchWechatListInfo(NUM_OF_PAGE,currentPage)
+                .compose(RxUtil.<WXHttpResponse<List<WXItemBean>>>rxSchedulerHelper())
+                .compose(RxUtil.<List<WXItemBean>>handleWXResult())
+                .compose(((RxActivity)activity).<List<WXItemBean>>bindUntilEvent(ActivityEvent.DESTROY))
+                .subscribeWith(new CommonSubscriber<List<WXItemBean>>(mView) {
+                    @Override
+                    public void onNext(List<WXItemBean> wxItemBeen) {
+                        mView.showContent(wxItemBeen);
+                    }
+                })
+        );
 
         addSubscribe(Observable.interval(10, TimeUnit.SECONDS)
                 .subscribeOn(Schedulers.io())

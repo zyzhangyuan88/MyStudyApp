@@ -17,6 +17,8 @@ import com.zhangyuan.app.mvp.presenter.WechatPresenter;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 
 /**
@@ -30,6 +32,7 @@ public class WxActivity extends RootActivity<WechatPresenter> implements WechatC
     SwipeRefreshLayout swipeRefresh;
     @BindView(R.id.content_frame)
     FrameLayout contentFrame;
+
 
     @Override
     protected int getLayout() {
@@ -45,8 +48,8 @@ public class WxActivity extends RootActivity<WechatPresenter> implements WechatC
     @Override
     protected void initEventAndData() {
         mPresenter.getWechatData(this);
-        ImplPreferencesHelper implPreferencesHelper = App.getAppComponent().preferencesHelper();
-        implPreferencesHelper.setVersionPoint(false);
+//        ImplPreferencesHelper implPreferencesHelper = App.getAppComponent().preferencesHelper();
+//        implPreferencesHelper.setVersionPoint(false);
         contentFrame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

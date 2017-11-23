@@ -7,7 +7,7 @@ android {
 
     defaultConfig {
         applicationId rootProject.ext.android.applicationId
-        minSdkVersion rootProject.ext.android.minSdkVersion
+        minSdkVersion 19
         targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode rootProject.ext.android.versionCode
         versionName rootProject.ext.android.versionName
@@ -112,5 +112,11 @@ dependencies {
 
 
     compile 'com.trello.rxlifecycle2:rxlifecycle:2.1.0'
-    compile 'com.trello.rxlifecycle2:rxlifecycle-android:2.1.0'
+    compile ('com.trello.rxlifecycle2:rxlifecycle-android:2.1.0'){
+        exclude module: 'support-annotations'
+    }
+
+    compile ('com.liulishuo.filedownloader:library:1.6.8'){
+        exclude module: 'support-annotations'
+    }
 }

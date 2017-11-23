@@ -4,7 +4,7 @@ ext {
             compileSdkVersion : 25,
             buildToolsVersion : '25.0.2',
             applicationId     : "com.zhangyuan.app",
-            minSdkVersion     : 21,
+            minSdkVersion     : 19,
             targetSdkVersion  : 25,
             versionCode       : 1,
             versionName       : "1.0.0"
