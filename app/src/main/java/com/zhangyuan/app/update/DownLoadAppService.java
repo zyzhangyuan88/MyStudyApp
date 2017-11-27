@@ -69,11 +69,11 @@ public class DownLoadAppService extends Service {
     private void starDownLoadForground() {
         CharSequence text = "下载中,请稍后...";
         notificationBuilder = new Notification.Builder(this);
-        notificationBuilder.setSmallIcon(R.mipmap.ic_launcher);  // the status icon
+        notificationBuilder.setSmallIcon(R.mipmap.ic_launcher);
         notificationBuilder.setTicker(text);  // the status text
-        notificationBuilder.setWhen(System.currentTimeMillis());  // the time stamp
-        notificationBuilder.setContentText(text);  // the contents of the entry
-        notificationBuilder.setContentTitle("正在下载更新" + 0 + "%"); // the label of the entry
+        notificationBuilder.setWhen(System.currentTimeMillis());
+        notificationBuilder.setContentText(text);
+        notificationBuilder.setContentTitle("正在下载更新" + 0 + "%");
         notificationBuilder.setProgress(100, 0, false);
         notificationBuilder.setOngoing(true);
         notificationBuilder.setAutoCancel(true);
@@ -106,6 +106,7 @@ public class DownLoadAppService extends Service {
 
         downLoading = true;
 
+
         FileDownloader.setup(context);
 
         FileDownloader.getImpl().create(url)
@@ -113,7 +114,7 @@ public class DownLoadAppService extends Service {
                 .setListener(new FileDownloadLargeFileListener() {
                     @Override
                     protected void pending(BaseDownloadTask task, long soFarBytes, long totalBytes) {
-                        Toast.makeText(context, "下载出pending", Toast.LENGTH_SHORT).show();
+
                     }
 
                     @Override

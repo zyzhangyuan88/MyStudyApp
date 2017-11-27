@@ -10,6 +10,8 @@ import android.view.Display;
 import android.view.WindowManager;
 
 
+import com.squareup.leakcanary.LeakCanary;
+import com.squareup.leakcanary.RefWatcher;
 import com.zhangyuan.app.component.InitializeService;
 import com.zhangyuan.app.di.component.AppComponent;
 import com.zhangyuan.app.di.component.DaggerAppComponent;
@@ -38,6 +40,9 @@ public class App extends Application{
         return instance;
     }
 
+
+    private RefWatcher refWatcher;
+
     static {
         AppCompatDelegate.setDefaultNightMode(
                 AppCompatDelegate.MODE_NIGHT_NO);
@@ -47,6 +52,7 @@ public class App extends Application{
     public void onCreate() {
         super.onCreate();
         instance = this;
+        refWatcher = LeakCanary.install(this);
 
         //初始化屏幕宽高
         getScreenSize();
@@ -56,6 +62,12 @@ public class App extends Application{
         //在子线程中完成其他初始化
         InitializeService.start(this);
     }
+
+    public static RefWatcher getRefWatcher(Context context) {
+        App application = (App) context.getApplicationContext();
+        return application.refWatcher;
+    }
+
 
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
